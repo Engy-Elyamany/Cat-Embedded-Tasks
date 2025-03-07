@@ -1,31 +1,34 @@
-#include <stdio.h>
-#include <stdbool.h>
+#include "dynamicQueue.h"
 #include <stdlib.h>
 
 int length = 0;
-struct node
-{
-    int item;
-    struct node *next;
-};
 
 struct node *front = NULL;
 struct node *rear = NULL;
 
-
-bool isEmpty()
+int isEmpty()
 {
     return (front == NULL );
 }
 
-void enqueue(int element)
-{
+
+struct node* initNode(){
     struct node *newItem;
     newItem = (struct node *)malloc(sizeof(struct node));
     if (newItem == NULL)
     {
         printf("Allocation failed in Enqueue\n");
+        return NULL;
     }
+    return newItem;
+}
+int enqueue(TYPE element)
+{
+    struct node* newItem = initNode();
+   if(newItem == NULL){
+    printf("Can't Enqueue!!\n");
+    return 0;
+   }
     else
     {
 
@@ -42,19 +45,21 @@ void enqueue(int element)
              rear->next = newItem;
         rear = newItem;
         }
-       
+       return 1;
     }
 }
 
-void dequeue()
+TYPE dequeue()
 {
     if (isEmpty())
     {
         printf("Empty Queue! Can't delete\n");
+        return -1;
     }
     else
     {
          struct node *temp = front;
+         TYPE del = temp->item;
         if (length == 1)
         {
             front = rear = NULL;
@@ -66,6 +71,7 @@ void dequeue()
         temp->next = NULL;
         free(temp);
         length--;
+        return del;
     }
 }
 
@@ -82,13 +88,4 @@ void display(){
     }
     printf("\n");
 }
-}
-
-int main()
-{
-    enqueue(5);
-    display();
-    dequeue();
-    display();
-    return 0;
 }

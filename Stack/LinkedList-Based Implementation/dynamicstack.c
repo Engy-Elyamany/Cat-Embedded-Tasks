@@ -1,25 +1,18 @@
-#include <stdio.h>
-#include <stdbool.h>
+#include "dynamicStack.h"
 #include <stdlib.h>
-
-struct node
-{
-    int value;
-    struct node *next;
-};
 
 //initialize top pointer to null 
 struct node *top = NULL;
 
 struct node *newItem;
 
-bool isEmpty()
+int isEmpty()
 {
     // true if the pointer doesn't point to any node 
     return (top == NULL);
 }
 
-void push(int element)
+void push(TYPE element)
 {
     /*
     -  if newItem has not been initialized to any memory location, it will produce a segmentation fault
@@ -42,7 +35,7 @@ void push(int element)
     
 }
 
-int pop()
+TYPE pop()
 {
     if (isEmpty())
     {
@@ -68,7 +61,7 @@ int pop()
         return n;
     }
 }
-int peek()
+TYPE peek()
 {
     if (isEmpty())
     {
@@ -98,20 +91,4 @@ void display()
         }
         printf("\n");
     }
-}
-
-int main()
-{   pop();
-    peek();
-
-    push(5);
-    push(10);
-    push(15);
-    push(20);
-    display();
-
-    printf("The deleted element is %d \n", pop());
-    printf("The last element is %d \n", peek());
-    display();
-    return 0;
 }

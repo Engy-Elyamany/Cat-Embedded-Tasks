@@ -1,54 +1,60 @@
-#include <stdio.h>
-#include <stdbool.h>
-#define maxSize 100
-int q[maxSize];
+#include "staticQueue.h"
+
+TYPE q[MAXSIZE];
 int front = -1, rear = -1, length = 0;
 
-bool isEmpty()
+int isEmpty()
 {
-    return (front == -1 || front > rear);
+    return length == 0 ;
 }
 
-bool isFull()
+int isFull()
 {
-    return rear == maxSize - 1;
+    return length == MAXSIZE;
 }
 
-void enqueue(int val)
+int enqueue(TYPE val)
 {
-    if (isFull())
+    if (isFull()){
         printf("Full Queue! Can't enqueue\n");
+        return 0 ;
+}
     else
     {
         if (isEmpty())
             front = rear = 0;
         else
         {
-            rear++;
+            rear = (rear + 1) % MAXSIZE;
         }
         q[rear] = val;
         length++;
+        return 1;
     }
 }
 
-void dequeue()
+int dequeue()
 {
     if (isEmpty())
     {
         printf("Empty Queue! Can't delete\n");
+        return 0;
     }
 
     else
     {
         int n = q[front];
+
+        //Ther's only one element in the queue
         if (front == rear)
             front = rear = -1;
         else
         {
-            front++;
+            front = (front + 1) % MAXSIZE;
         }
         length--;
         printf("the deleted element = %d\n", n);
+        return 1;
     }
    
 }
@@ -56,7 +62,7 @@ void dequeue()
 void peek(){
      if (isEmpty())
     {
-        printf("Empty Queue! Can't delete\n");
+        printf("Empty Queue!\n");
     }
     else{
         printf("The first element = %d\n",q[front]);
@@ -75,17 +81,4 @@ void display(){
         printf("\n");
         
     }
-}
-
-void main()
-{
-    enqueue(5);
-    enqueue(15);
-    enqueue(25);
-    enqueue(35);
-    display();
-
-    peek();
-    dequeue();
-    display();
 }

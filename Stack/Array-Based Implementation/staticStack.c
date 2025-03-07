@@ -1,31 +1,32 @@
-#include <stdio.h>
-#include <stdbool.h>
-#define max 100
-int top = -1;
-int stack[max];
+#include "staticStack.h"
 
-bool isEmpty()
+int top = -1;
+TYPE stack[MAXSIZE];
+
+int isEmpty()
 {
     return (top == -1);
 }
-
-bool isFull()
+int isFull()
 {
-    return (top == max - 1);
+    return (top == MAXSIZE - 1);
 }
 
-void push(int element)
+int push(TYPE element)
 {
-    if (isFull())
+    if (isFull()){
         printf("Stack is full! Can't add a new element\n");
+        return 0;
+    }
     else
     {
         top++;
         stack[top] = element;
+        return 1;
     }
 }
 
-int pop()
+TYPE pop()
 {
     if (isEmpty())
     {
@@ -35,12 +36,12 @@ int pop()
 
     else
     {
-        int n = stack[top];
+        TYPE n = stack[top];
         --top;
         return n;
     }
 }
-int peek()
+TYPE peek()
 {
     if (isEmpty())
     {
@@ -66,22 +67,4 @@ void display()
         }
         printf("\n");
     }
-}
-
-int main()
-{
-    pop();
-    peek();
-
-    push(5);
-    push(10);
-    push(15);
-    push(20);
-    display();
-
-    printf("The deleted element is %d \n", pop());
-    printf("The last element is %d \n", peek());
-    display();
-
-    return 0;
 }
