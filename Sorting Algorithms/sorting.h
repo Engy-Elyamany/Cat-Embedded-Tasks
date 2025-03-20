@@ -16,7 +16,7 @@ static void print_sorted(int arr[], int n)
     {
         printf("%d ", arr[i]);
     }
-    printf("\n----------------------------------\n");
+    printf("\n");
 }
 void print_sorted(int arr[], int n);
 void bubble_sort(int arr[], int n);
