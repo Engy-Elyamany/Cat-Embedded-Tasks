@@ -18,7 +18,6 @@ static void print_sorted(int arr[], int n)
     }
     printf("\n");
 }
-void print_sorted(int arr[], int n);
 void bubble_sort(int arr[], int n);
 void selection_sort(int arr[], int n);
 void insertion_sort(int arr[], int n);
